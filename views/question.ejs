@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Questions - Exam Application System</title>
+  <link rel="stylesheet" href="/css/question.css" />
+ 
+</head>
+<body>
+
+  <div class="header">Welcome to the Exam Application System</div>
+
+  <div class="container">
+    <div class="sidebar">
+      <h3>Admin</h3>
+      <a href="/admin">Dashboard</a>
+      <a href="/subject">Subject</a>
+      <a href="/exam">Exam</a>
+      <a href="/question">Questions</a>
+      <a href="/schedule">Schedule</a>
+    </div>
+
+    <div class="main-content">
+      <div class="row">
+        <!-- Add Question Form -->
+        <div class="form-box">
+          <h2>Add New Question</h2>
+          <form action="/question/add" method="POST">
+            <input type="text" name="qname" placeholder="Enter question" required />
+            <input type="text" name="op1" placeholder="Option 1" required />
+            <input type="text" name="op2" placeholder="Option 2" required />
+            <input type="text" name="op3" placeholder="Option 3" required />
+            <input type="text" name="op4" placeholder="Option 4" required />
+            <input type="number" name="answer" min="1" max="4" placeholder="Correct Option Number" required />
+            <select name="cid" required>
+              <% courses.forEach(course => { %>
+                <option value="<%= course.cid %>"><%= course.cname %></option>
+              <% }) %>
+            </select>
+            <button type="submit">Save Question</button>
+          </form>
+        </div>
+
+        <!-- Question List -->
+        <div class="table-box">
+          <h2>Question List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Course</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (questions && questions.length > 0) { %>
+                <% questions.forEach((q, index) => { %>
+                  <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= q.qname %></td>
+                    <td><%= q.answer %></td>
+                    <td><%= q.cname %></td>
+                    <td><a href="/question/delete/<%= q.qid %>">Delete</a></td>
+                  </tr>
+                <% }) %>
+              <% } else { %>
+                <tr>
+                  <td colspan="5">No questions available.</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Register – Exam App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/adminRegister.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Shiv<span>.Exam</span></div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/login">Login</a>
+      <a href="/register">Sign Up</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Register Box -->
+  <div class="register-wrapper">
+    <div class="register-box">
+
+      <h1>Welcome Admin</h1>
+      <p>Register a new admin account</p>
+
+      <!-- Role Buttons -->
+      <div class="role-buttons">
+        <a href="/register">Student Register</a>
+        <a href="/adminRegister">Admin Register</a>
+      </div>
+
+      <!-- Step Indicator -->
+      <div class="steps">
+        <div class="step active">1 <span>Account</span></div>
+        <div class="step">2 <span>Details</span></div>
+      </div>
+
+      <!-- Registration Form -->
+      <form action="/adminRegister" method="POST">
+
+        <div class="form-section">
+          <label for="aname">Admin Name</label>
+          <input type="text" id="aname" name="aname" required>
+        </div>
+
+        <div class="form-section">
+          <label for="aemail">Email</label>
+          <input type="email" id="aemail" name="aemail" required>
+        </div>
+
+        <div class="form-section">
+          <label for="ausername">Username</label>
+          <input type="text" id="ausername" name="ausername" required>
+        </div>
+
+        <div class="form-section">
+          <label for="apassword">Password</label>
+          <input type="password" id="apassword" name="apassword" required>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <div class="extra">
+          Already have an account? <a href="/login">Login</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+</html>

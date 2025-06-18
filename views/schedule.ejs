@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Schedule</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/schedule.css">
+</head>
+<body>
+
+  <div class="header">Welcome to the Exam Application System</div>
+
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Admin</h3>
+      <a href="/admin">Admin</a>
+      <a href="/subject">Subject</a>
+      <a href="/exam">Exam</a>
+      <a href="/question">Questions</a>
+      <a href="/schedule">Schedule</a>
+      <a href="/views/About.ejs"></a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+      <div class="row justify-content-around">
+        <!-- Schedule Form -->
+        <div class="col-md-5 mb-4 form-wrapper">
+          <div class="card p-4">
+            <h5 class="mb-3">Schedule Form</h5>
+            <form action="/schedule" method="POST">
+              <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label>Start Time</label>
+                <input type="time" name="starttime" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label>End Time</label>
+                <input type="time" name="endtime" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label>Course</label>
+                <select name="cid" class="form-control" required>
+                  <option value="">Select Course</option>
+                  <% courses.forEach(course => { %>
+                    <option value="<%= course.cid %>"><%= course.cname %></option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Exam</label>
+                <select name="ex_id" class="form-control" required>
+                  <option value="">Select Exam</option>
+
+                  <% exams.forEach(exam => { %>
+                    <option value="<%= exam.ex_id %>"><%= exam.exname %></option>
+                  <% }) %>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-custom btn-block">Submit Schedule</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Schedule List -->
+        <div class=" list-wrapper">
+          <div class="card p-3">
+            <h5 class="mb-3">Schedule List</h5>
+            <table class="table table-bordered table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Date</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Course</th>
+                  <th>Exam</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if (schedules.length > 0) { %>
+                  <% schedules.forEach(s => { %>
+                    <tr>
+                      <td><%= s.date.toISOString().split('T')[0] %></td>
+                      <td><%= s.starttime %></td>
+                      <td><%= s.endtime %></td>
+                      <td><%= s.cname %></td>
+                      <td><%= s.ename %></td>
+                      <td>
+                        <button class="btn btn-warning btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                      </td>
+                    </tr>
+                  <% }) %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="6" class="text-center">No schedules found</td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

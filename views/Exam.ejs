@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exam Application System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/> <!-- add bootstrap  -->
+  <link rel="stylesheet" href="/css/Exam.css">
+ 
+</head>
+<body>
+  <div class="header">Welcome to the Exam Application System</div>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin">Dashboard</a>   <!-- call admin page  -->
+      <a href="/subject">Subject</a>   <!-- call subject page  -->
+      <a href="/exam">Exam</a>          <!-- call exam page  -->
+      <a href="/question">Questions</a>
+      <a href="/schedule">Schedule</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="row">
+        <!-- Exam Form -->
+        <div class="col-md-5">
+          <div class="card p-3 mb-4">
+            <h4>Exam Form</h4>
+            <form action="/exam" method="POST">    
+              <input type="text" class="form-control mb-2" placeholder="Exam Name" name="ename" required />
+              <input type="number" class="form-control mb-2" placeholder="Total Marks" name="total" required />
+              <input type="number" class="form-control mb-3" placeholder="Passing Marks" name="passing" required />
+              <button class="btn btn-primary w-100">Submit Exam</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Exam List -->
+        <div class="col-md-7">
+          <div class="card p-3 mb-4">
+            <h4>Exam List</h4>
+            <table class="table table-bordered text-center">
+              <thead class="table-dark">
+                <tr>
+                  <th>Exam ID</th>
+                  <th>Exam Name</th>
+                  <th>Total Marks</th>
+                  <th>Passing Marks</th>
+                  <th>Update</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% examList.forEach((exam) => { %> <!-- This is where the error occurs this is a express tag  which is use to render data from the server to the client-->
+                  <tr>
+                    <td><%= exam.ex_id %></td>
+                    <td><%= exam.exname %></td>
+                    <td><%= exam.totalmark %></td>
+                    <td><%= exam.passingmark %></td>
+                    <td><a href="/exam/update?id=<%= exam.ex_id %>" class="btn btn-sm btn-primary">Update</a></td><!-- // Update link-->
+                    <td><a href="/exam/delete?id=<%= exam.ex_id %>" class="btn btn-sm btn-danger">Delete</a></td> <!-- // Delete link-->
+                  </tr>
+                <% }); %>  <!-- update the page with the new data -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
