@@ -1,5 +1,7 @@
 const userModel = require("../models/userModel");
 
+// ========== Admin ==========
+
 // Admin Registration Page
 exports.showAdminRegister = (req, res) => {
   res.render("adminRegister");
@@ -8,9 +10,10 @@ exports.showAdminRegister = (req, res) => {
 // Admin Registration Logic
 exports.adminRegister = (req, res) => {
   const { aname, apassword } = req.body;
+
   userModel.createAdmin(aname, apassword, (err) => {
     if (err) return res.send("Error registering admin.");
-    res.redirect("/admin/login");
+    return res.redirect("/admin/login");
   });
 };
 
@@ -22,11 +25,15 @@ exports.showAdminLogin = (req, res) => {
 // Admin Login Logic
 exports.adminLogin = (req, res) => {
   const { aname, apassword } = req.body;
+
   userModel.verifyAdminLogin(aname, apassword, (err, admin) => {
     if (err || !admin) return res.send("Invalid admin credentials.");
-    res.redirect("/admin/dashboard");
+    req.session.aid = admin.aid; // Store admin ID
+    return res.redirect("/admin/dashboard");
   });
 };
+
+// ========== Student ==========
 
 // Student Registration Page
 exports.showStudentRegister = (req, res) => {
@@ -36,9 +43,10 @@ exports.showStudentRegister = (req, res) => {
 // Student Registration Logic
 exports.studentRegister = (req, res) => {
   const { sname, semail, spassword, scontact } = req.body;
+
   userModel.createStudent(sname, semail, spassword, scontact, (err) => {
     if (err) return res.send("Error registering student.");
-    res.redirect("/student/login");
+    return res.redirect("/student/login");
   });
 };
 
@@ -47,7 +55,7 @@ exports.showStudentLogin = (req, res) => {
   res.render("LoginStudent");
 };
 
-
+//  Student Login Logic 
 exports.studentLogin = (req, res) => {
   const { semail, spassword } = req.body;
 
@@ -57,7 +65,15 @@ exports.studentLogin = (req, res) => {
       return res.send("Invalid student credentials.");
     }
 
-    req.session.sid = student.sid; // Save student ID in session
-    res.redirect("/student/dashboard");
+    
+    req.session.sid = student.sid;
+    req.session.studentName = student.sname;
+    req.session.studentEmail = student.semail;
+    req.session.studentContact = student.scontact;
+    req.session.sid = student.sid;
+    req.session.sid = student.sid;
+    console.log("Logged in. SID:", req.session.sid);
+
+    return res.redirect("/student"); // Redirect to student dashboard or welcome page
   });
 };

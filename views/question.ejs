@@ -1,10 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Questions - Exam Application System</title>
-  <link rel="stylesheet" href="/css/question.css" />
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #002d72;
+      color: white;
+      padding: 30px 20px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #0052D4;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-x: auto;
+    }
+
+    /* New flex row to hold form and table side by side */
+    .row {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .form-box, .table-box {
+      background: white;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    /* About half width each */
+    .form-box {
+      flex: 1 1 320px;
+      max-width: 450px;
+      min-width: 320px;
+    }
+
+    .table-box {
+      flex: 2 1 600px;
+      min-width: 300px;
+      overflow-x: auto;
+    }
+
+    .form-box h2, .table-box h2 {
+      color: #0052D4;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    button {
+      background: #0052D4;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #003c9e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #0052D4;
+      color: white;
+      user-select: none;
+    }
+
+    .delete-btn {
+      color: #e74c3c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .delete-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* Pagination styling */
+    .pagination {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      user-select: none;
+    }
+
+    .pagination button {
+      background: none;
+      border: 1px solid #0052D4;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      color: #0052D4;
+      font-weight: 600;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .pagination button:hover {
+      background-color: #0052D4;
+      color: white;
+    }
+
+    .pagination button.active {
+      background-color: #0052D4;
+      color: white;
+      cursor: default;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .form-box, .table-box {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,18 +214,18 @@
   <div class="container">
     <div class="sidebar">
       <h3>Admin</h3>
-      <a href="/admin">Dashboard</a>
-      <a href="/subject">Subject</a>
-      <a href="/exam">Exam</a>
-      <a href="/question">Questions</a>
-      <a href="/schedule">Schedule</a>
+      <a href="/admin"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="/subject"><i class="fas fa-book"></i> Subject</a>
+      <a href="/exam"><i class="fas fa-pencil-alt"></i> Exam</a>
+      <a href="/question" class="active"><i class="fas fa-question-circle"></i> Questions</a>
+      <a href="/schedule"><i class="fas fa-calendar-alt"></i> Schedule</a>
     </div>
 
     <div class="main-content">
       <div class="row">
         <!-- Add Question Form -->
         <div class="form-box">
-          <h2>Add New Question</h2>
+          <h2><i class="fas fa-plus"></i> Add New Question</h2>
           <form action="/question/add" method="POST">
             <input type="text" name="qname" placeholder="Enter question" required />
             <input type="text" name="op1" placeholder="Option 1" required />
@@ -37,14 +238,14 @@
                 <option value="<%= course.cid %>"><%= course.cname %></option>
               <% }) %>
             </select>
-            <button type="submit">Save Question</button>
+            <button type="submit"><i class="fas fa-save"></i> Save Question</button>
           </form>
         </div>
 
         <!-- Question List -->
         <div class="table-box">
-          <h2>Question List</h2>
-          <table>
+          <h2><i class="fas fa-list"></i> Question List</h2>
+          <table id="questionTable">
             <thead>
               <tr>
                 <th>#</th>
@@ -54,7 +255,7 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBody">
               <% if (questions && questions.length > 0) { %>
                 <% questions.forEach((q, index) => { %>
                   <tr>
@@ -62,7 +263,14 @@
                     <td><%= q.qname %></td>
                     <td><%= q.answer %></td>
                     <td><%= q.cname %></td>
-                    <td><a href="/question/delete/<%= q.qid %>">Delete</a></td>
+                    <td>
+  <a href="/question/edit/<%= q.qid %>" class="delete-btn" style="margin-right:10px;">
+    <i class="fas fa-edit"></i> Edit
+  </a>
+  <a href="/question/delete/<%= q.qid %>" class="delete-btn">
+    <i class="fas fa-trash-alt"></i> Delete
+  </a>
+</td>
                   </tr>
                 <% }) %>
               <% } else { %>
@@ -72,9 +280,71 @@
               <% } %>
             </tbody>
           </table>
+
+          <!-- Pagination -->
+          <div class="pagination" id="pagination"></div>
+
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const rowsPerPage = 5;
+    const tableBody = document.getElementById('tableBody');
+    const pagination = document.getElementById('pagination');
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    let currentPage = 1;
+
+    function displayPage(page) {
+      currentPage = page;
+
+      // Hide all rows
+      rows.forEach(row => (row.style.display = 'none'));
+
+      // Show rows for current page
+      const start = (page - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      rows.slice(start, end).forEach(row => (row.style.display = ''));
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      pagination.innerHTML = '';
+
+      // Prev button
+      const prevBtn = document.createElement('button');
+      prevBtn.textContent = '« Prev';
+      prevBtn.disabled = currentPage === 1;
+      prevBtn.onclick = () => displayPage(currentPage - 1);
+      pagination.appendChild(prevBtn);
+
+      // Page numbers
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.onclick = () => displayPage(i);
+        pagination.appendChild(btn);
+      }
+
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.textContent = 'Next »';
+      nextBtn.disabled = currentPage === totalPages;
+      nextBtn.onclick = () => displayPage(currentPage + 1);
+      pagination.appendChild(nextBtn);
+    }
+
+    if (rows.length > 0) {
+      displayPage(1);
+    }
+  });
+</script>
+
+
 </body>
 </html>

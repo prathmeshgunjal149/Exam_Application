@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Download Result PDF</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #8dbffd, #cfdef3);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #41d9f1;
+      padding: 40px 50px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      animation: fadeInUp 0.7s ease-in-out;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #1F4E79;
+    }
+
+    form button {
+      padding: 12px 28px;
+      background-color: #1F4E79;
+      color: rgb(255, 255, 255);
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #163a5c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(31, 78, 121, 0.4);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #1b7ad3;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #0d2b45;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📄 Download Your Exam Result</h1>
+    <form action="/exam/download-pdf" method="POST">
+      <button type="submit">⬇ Download PDF</button>
+    </form>
+    <a href="/student/dashboard">⬅ Back to Dashboard</a>
+  </div>
+</body>
+</html>

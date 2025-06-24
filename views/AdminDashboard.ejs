@@ -2,44 +2,177 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Admin Dashboard – Shiv.EXAM</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard - Exam Application System</title>
 
-  <!-- Font Awesome CDN for icons -->
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="/css/AdminDashboard.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fa;
+    }
+
+    .top-navbar {
+      background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC);
+      padding: 15px 40px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #ffe600;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .top-actions a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .top-actions a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #002d72;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      color: white;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .sidebar h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #ffe600;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+
+    .sidebar a:hover {
+      background-color: #0052D4;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      background-color: #f5f7fa;
+    }
+
+    .dashboard-welcome {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    .dashboard-welcome i {
+      font-size: 50px;
+      color: #0052D4;
+    }
+
+    .dashboard-welcome h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(15px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- Top Navbar -->
   <header class="top-navbar">
     <div class="logo">Shiv<span>.Exam</span></div>
-    <div class="welcome-msg">Welcome Admin Panel</div>
+    <div class="top-actions">
+      <a href="/">🏠 Home</a>
+      <a href="/logout">🔓 Logout</a>
+    </div>
   </header>
 
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h3><i class="fas fa-user-shield"></i> Admin</h3>
+      <h3><i class="fas fa-user-shield"></i> Admin Panel</h3>
       <a href="#"><i class="fas fa-user"></i> Admin</a>
-      <a href="/subject"><i class="fas fa-book"></i> Subject</a>
-      <a href="/exam"><i class="fas fa-pencil-alt"></i> Exam</a>
+      <a href="/subject"><i class="fas fa-book"></i> Subjects</a>
+      <a href="/exam"><i class="fas fa-pencil-alt"></i> Exams</a>
       <a href="/question"><i class="fas fa-question-circle"></i> Questions</a>
       <a href="/schedule"><i class="fas fa-calendar-alt"></i> Schedule</a>
-      <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
+      <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="/admin/register"><i class="fas fa-user-plus"></i> Admin Register</a>
     </aside>
 
     <!-- Main Content -->
-   <main class="main-content">
-  <div class="dashboard-welcome">
-    <i class="fas fa-chalkboard-teacher"></i>
-    <div>
-      <h2>Welcome, Admin!</h2>
+    <main class="main-content">
+      <div class="dashboard-welcome">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <div>
+          <h2>Welcome, Admin!</h2>
+          <p>Use the sidebar to manage the exam application system.</p>
+        </div>
       </div>
-     
-  </div>
-</main>
-
+    </main>
   </div>
 
 </body>

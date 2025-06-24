@@ -3,39 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login – Exam App</title>
+  <title>Admin Login – Exam App</title>
+
+  <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <nav class="navbar">
-    <a href="/">Home</a>
-    <a href="/register">Sign Up</a>
-    <a href="/login">Login</a>
-  </nav>
+  <%- include("Navbar") %>
 
-  <!-- Login Form -->
-  <div class="login-box">
-    <h1>Welcome to Exam App</h1>
+  <div class="login-container">
+    <div class="login-box">
+      <h1><i class="fas fa-user-shield"></i> Admin Login</h1>
+      <p>Welcome back, please login to continue</p>
 
-    <!-- Student/Admin Role Buttons -->
-    <div class="role-buttons">
-      <a href="/LoginStudent">Student Login</a>
-      <a href="/login">Admin Login</a>
-    </div>
+      <form action="/login" method="POST">
+        <div class="input-group">
+          <label><i class="fas fa-user"></i> Username</label>
+          <input type="text" name="username" placeholder="Enter username" required />
+        </div>
 
-    <h2>Login</h2>
+        <div class="input-group">
+          <label><i class="fas fa-lock"></i> Password</label>
+          <input type="password" name="password" placeholder="Enter password" required />
+        </div>
 
-    <form name="frm" action="/login" method="POST">
-      <input type="text" name="username" placeholder="Enter username" required />
-      <input type="password" name="password" placeholder="Enter password" required />
-      <button type="submit">Login</button>
-    </form>
+        <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </form>
 
-    <div class="extra">
-      Don’t have an account? <a href="/register">Register</a>
+      <div class="extra">
+        Don’t have an account? <a href="/register">Register</a>
+      </div>
     </div>
   </div>
 

@@ -1,82 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Subjects - Exam Application System</title>
-  <link rel="stylesheet" href="/css/subject.css">
+  <meta charset="UTF-8" />
+  <title>Subjects – Shiv.EXAM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f7fa;
+      overflow-x: hidden;
+    }
+    .top-navbar {
+      background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC);
+      padding: 15px 40px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .logo span {
+      color: #ffe600;
+    }
+    .welcome-msg {
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background-color: #002d72;
+      padding: 30px 20px;
+      color: white;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .sidebar h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #ffe600;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover {
+      background-color: #0052D4;
+    }
+    .main-content {
+      flex: 1;
+      padding: 40px;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+    .card h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #0052D4;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table th, table td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background-color: #f0f0f0;
+      font-weight: 600;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .btn-custom {
+      background-color: #0052D4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .btn-custom:hover {
+      background-color: #003eaa;
+    }
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .pagination a {
+      margin: 0 5px;
+      padding: 8px 14px;
+      border-radius: 5px;
+      background-color: #eee;
+      color: #0052D4;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .pagination a.active {
+      background-color: #0052D4;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="header">
-    Welcome to the Exam Application System
-  </div>
+  <!-- Top Navbar -->
+  <header class="top-navbar">
+    <div class="logo">Shiv<span>.Exam</span></div>
+    <div class="welcome-msg">Subject Management</div>
+  </header>
 
   <div class="container">
     <!-- Sidebar -->
-    <div class="sidebar">
-      <h3>Admin</h3>
+    <aside class="sidebar">
+      <h3><i class="fas fa-user-shield"></i> Admin Panel</h3>
       <a href="/admin"><i class="fas fa-home"></i> Dashboard</a>
-      <a href="/subject"><i class="fas fa-book"></i> Subject</a>
-      <a href="/exam"><i class="fas fa-pen"></i> Exam</a>
+      <a href="/subject"><i class="fas fa-book"></i> Subjects</a>
+      <a href="/exam"><i class="fas fa-pen"></i> Exams</a>
       <a href="/question"><i class="fas fa-question-circle"></i> Questions</a>
       <a href="/schedule"><i class="fas fa-calendar-alt"></i> Schedule</a>
-      <a href="/contact"><i class="fas fa-envelope"></i> Contact Us</a>
-    </div>
+      <a href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+    </aside>
 
     <!-- Main Content -->
-    <div class="main">
-      <div class="cards">
-
-        <!-- Existing Courses Card -->
-        <div class="card">
-          <h2><i class="fas fa-list"></i> Existing Courses</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Course ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if (subjects && subjects.length > 0) { %>
-                <% subjects.forEach(subject => { %>
-                  <tr>
-                    <td><%= subject.cid %></td>
-                    <td><%= subject.cname %></td>
-                    <td>
-                      <form method="POST" action="/subject/delete/<%= subject.cid %>">
-                        <button class="delete-btn">Delete</button>
-                      </form>
-                    </td>
-                  </tr>
-                <% }) %>
-              <% } else { %>
-                <tr>
-                  <td colspan="3">No courses found</td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Add New Course Card -->
-        <div class="card right">
-          <h2><i class="fas fa-plus-circle"></i> Add New Course</h2>
-          <form action="/subject" method="POST">
-            <div class="form-group">
-              <label for="cname">Course Name</label>
-              <input type="text" id="cname" name="cname" placeholder="Enter course name" required />
-            </div>
-            <button type="submit">Add Course</button>
-          </form>
-        </div>
-        
+    <main class="main-content">
+      <div class="card">
+        <h2><i class="fas fa-plus-circle"></i> Add New Course</h2>
+        <form action="/subject" method="POST">
+          <div class="form-group">
+            <input type="text" name="cname" placeholder="Enter course name" required />
+          </div>
+          <button type="submit" class="btn-custom">Add Course</button>
+        </form>
       </div>
-    </div>
+      <div class="card">
+        <h2><i class="fas fa-list"></i> Existing Courses</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Course ID</th>
+              <th>Course Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="subjectTableBody">
+            <% if (subjects && subjects.length > 0) { %>
+              <% subjects.forEach((subject, index) => { %>
+                <tr class="subject-row" data-index="<%= index %>">
+                  <td><%= subject.cid %></td>
+                  <td><%= subject.cname %></td>
+                  <td>
+                    <form method="POST" action="/subject/delete/<%= subject.cid %>">
+                      <button class="delete-btn">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="3">No courses found</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <!-- Pagination -->
+        <div class="pagination" id="paginationControls"></div>
+      </div>
+
+      
+    </main>
   </div>
 
+  <!-- Pagination Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const rowsPerPage = 5;
+      const rows = document.querySelectorAll(".subject-row");
+      const pagination = document.getElementById("paginationControls");
+
+      function showPage(page) {
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        rows.forEach((row, index) => {
+          row.style.display = index >= start && index < end ? "" : "none";
+        });
+      }
+
+      function setupPagination() {
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+        pagination.innerHTML = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+          const a = document.createElement("a");
+          a.href = "#";
+          a.textContent = i;
+          a.classList.add("page-link");
+          if (i === 1) a.classList.add("active");
+
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+            showPage(i);
+            document.querySelectorAll(".pagination a").forEach(el => el.classList.remove("active"));
+            a.classList.add("active");
+          });
+
+          pagination.appendChild(a);
+        }
+
+        showPage(1);
+      }
+
+      setupPagination();
+    });
+  </script>
 </body>
 </html>

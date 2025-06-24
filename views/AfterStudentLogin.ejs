@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Student</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 10px;
+      font-weight: 600;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .welcome-box {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="welcome-box">
+      <h1>Welcome, <%= student.sname %> 👋</h1>
+      <p><strong>Email:</strong> <%= student.semail %></p>
+      <p><strong>Contact:</strong> <%= student.scontact %></p>
+    </div>
+
+    <form method="POST" action="/student/select-exam">
+      <label for="exam">Select Exam Schedule:</label>
+      <select name="selectedExam" id="exam" required>
+        <% exams.forEach(function(exam) { %>
+          <option value="<%= exam.schid %>">
+            <%= exam.cname %> - <%= exam.exname %> - 
+            <%= exam.date.toISOString().split('T')[0] %> - 
+            <%= exam.starttime %> to <%= exam.endtime %>
+          </option>
+        <% }); %>
+      </select>
+      <button type="submit">Proceed to Dashboard</button>
+    </form>
+  </div>
+
+</body>
+</html>

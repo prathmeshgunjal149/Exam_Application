@@ -1,35 +1,100 @@
-<!-- update exam form  -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Update Exam</title>
+  <meta charset="UTF-8">
+  <title>Update Exam – Shiv.EXAM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/UpdateExam.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #c3ec52, #0ba29d);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 15px;
+    }
+
+    .update-form-container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+
+    .update-form-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-label {
+      font-weight: 500;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #0052D4, #4364F7);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, #4364F7, #6FB1FC);
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container mt-5">
-    <h2 class="mb-4">Update Exam</h2>
+
+  <div class="update-form-container">
+    <h2><i class="fas fa-edit"></i> Update Exam</h2>
+
     <form action="/exam/update" method="POST">
-          <input type="hidden" name="examId" value="<%= exam.ex_id %>">
+      <input type="hidden" name="examId" value="<%= exam.ex_id %>">
+
       <div class="mb-3">
         <label for="ename" class="form-label">Exam Name</label>
         <input type="text" class="form-control" id="ename" name="ename" value="<%= exam.exname %>" required>
       </div>
+
       <div class="mb-3">
         <label for="totalMarks" class="form-label">Total Marks</label>
         <input type="number" class="form-control" id="totalMarks" name="totalMarks" value="<%= exam.totalmark %>" required>
       </div>
+
       <div class="mb-3">
         <label for="passingMarks" class="form-label">Passing Marks</label>
         <input type="number" class="form-control" id="passingMarks" name="passingMarks" value="<%= exam.passingmark %>" required>
       </div>
-      <button type="submit" class="btn btn-primary">Update Exam</button>
-       <button type="submit" class="btn btn-primary">Update Exam</button>
-      <a href="/exam" class="btn btn-secondary">Cancel</a>
-         <a href="/exam" class="btn btn-secondary">Cancel</a>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Update</button>
+        <a href="/exam" class="btn btn-secondary px-4"><i class="fas fa-times me-2"></i>Cancel</a>
+      </div>
     </form>
   </div>
+
 </body>
 </html>
-<!-- helo -->

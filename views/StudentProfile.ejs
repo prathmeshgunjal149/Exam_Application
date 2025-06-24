@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0052D4, #4364F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Container */
+    .profile-container {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 450px;
+      width: 100%;
+      padding: 40px 30px;
+      box-shadow: 0 15px 30px rgba(67, 100, 247, 0.3);
+      text-align: center;
+      animation: fadeInScale 0.8s ease forwards;
+    }
+
+    /* Heading */
+    .profile-container h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #0052D4;
+      margin-bottom: 30px;
+      user-select: none;
+      letter-spacing: 1.5px;
+    }
+
+    /* Profile card */
+    .card {
+      background: #f0f6ff;
+      border-radius: 15px;
+      padding: 30px 25px;
+      box-shadow: 0 6px 20px rgba(67, 100, 247, 0.15);
+      text-align: left;
+      font-size: 1.1rem;
+      color: #1a1a1a;
+      transition: box-shadow 0.3s ease;
+    }
+    .card p {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+      font-weight: 600;
+      user-select: text;
+    }
+    .card p span {
+      background: #4364F7;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(67, 100, 247, 0.45);
+      font-size: 1.3rem;
+      min-width: 50px;
+      text-align: center;
+      user-select: none;
+    }
+    .card:hover {
+      box-shadow: 0 15px 40px rgba(67, 100, 247, 0.35);
+    }
+
+    /* Back button */
+    .back-link {
+      display: inline-block;
+      margin-top: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0052D4;
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      border: 2px solid #0052D4;
+      transition: all 0.3s ease;
+      user-select: none;
+      box-shadow: 0 6px 18px rgba(67, 100, 247, 0.3);
+    }
+    .back-link:hover {
+      background-color: #0052D4;
+      color: white;
+      box-shadow: 0 8px 28px rgba(0, 82, 212, 0.6);
+    }
+
+    /* Animation */
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .profile-container {
+        padding: 30px 20px;
+      }
+      .card p {
+        font-size: 1rem;
+        gap: 12px;
+      }
+      .card p span {
+        font-size: 1.1rem;
+        min-width: 40px;
+        padding: 6px 12px;
+      }
+      .back-link {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <h1>👨‍🎓 Student Profile</h1>
+    <div class="card">
+      <p><span><i class="fas fa-user"></i></span> Name: <%= student.sname %></p>
+      <p><span><i class="fas fa-envelope"></i></span> Email: <%= student.semail %></p>
+      <p><span><i class="fas fa-phone"></i></span> Contact: <%= student.scontact %></p>
+      <p><span><i class="fas fa-calendar-alt"></i></span> Exam Schedule ID: <%= student.schid || "Not Assigned" %></p>
+    </div>
+    <a href="/student" class="back-link">⬅ Back to Dashboard</a>
+  </div>
+
+</body>
+</html>
