@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Schedule</title>
+  <link rel="stylesheet" href="/css/StudentExamSechdule.css">
+</head>
+<body>
+  <div class="schedule-container">
+    <h1>📅 Upcoming Exams</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Course</th>
+          <th>Exam</th>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% schedules.forEach((sch, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= sch.cname %></td>
+            <td><%= sch.exname %></td>
+            <td><%= sch.date.toISOString().split("T")[0] %></td>
+            <td><%= sch.starttime %></td>
+            <td><%= sch.endtime %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <a href="/student/dashboard" class="back">⬅ Back to Dashboard</a>
+  </div>
+</body>
+</html>

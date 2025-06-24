@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const questionCtrl = require('../controller/QuestionController');
+const questionController = require('../controller/QuestionController');
 
-// Show question page
-router.get('/admin/question', questionCtrl.getQuestionPage);
+// Route to show all questions with pagination
+router.get('/', questionController.getQuestionPage);
 
-// Handle question form submission
-router.post('/question/add', questionCtrl.addQuestion);
+// Route to add a new question
+router.post('/add', questionController.addQuestion);
 
-// Delete question
-router.get('/question/delete/:qid', questionCtrl.deleteQuestion);
-router.get('/question', (req, res) => {
-  res.redirect('/admin/question');
-});
+// Route to delete a question
+router.get('/delete/:qid', questionController.deleteQuestion);
+
+// Route to load the edit form
+router.get('/edit/:qid', questionController.editQuestionForm);
+router.get('/question/edit/:qid', questionController.editQuestionForm);
+
+// Route to handle update after editing
+router.post('/update/:qid', questionController.updateQuestion);
+
 module.exports = router;

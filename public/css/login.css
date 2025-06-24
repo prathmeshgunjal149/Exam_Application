@@ -1,158 +1,100 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  margin: 0;
+  padding: 0;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  animation: fadeIn 1s ease;
+}
 
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+.login-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
 
-    .navbar {
-      width: 100%;
-      background-color: #ffffff;
-      padding: 15px 0;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-    }
+.login-box h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #333;
+}
 
-    .navbar a {
-      margin: 0 20px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      font-size: 16px;
-      transition: 0.3s;
-    }
+.login-box p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
 
-    .navbar a:hover {
-      color: #6a11cb;
-    }
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
 
-    .login-box {
-      background-color: #ffffff;
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-      width: 90%;
-      max-width: 400px;
-      margin-top: 120px;
-      text-align: center;
-      animation: fadeIn 0.6s ease;
-    }
+.input-group label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
 
-    .login-box h1 {
-      font-size: 26px;
-      margin-bottom: 10px;
-      color: #333;
-    }
+.input-group i {
+  margin-right: 8px;
+  color: #007bff;
+}
 
-    .login-box h2 {
-      font-size: 18px;
-      margin-bottom: 25px;
-      color: #666;
-    }
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
 
-    .role-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
+.input-group input:focus {
+  border-color: #007bff;
+}
 
-    .role-buttons a {
-      padding: 10px 18px;
-      background: #6a11cb;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 14px;
-      transition: background 0.3s;
-    }
+button {
+  background: #007bff;
+  color: white;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
 
-    .role-buttons a:hover {
-      background: #4a0ea0;
-    }
+button:hover {
+  background: #0056d2;
+  transform: translateY(-2px);
+}
 
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 18px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-      transition: 0.3s ease;
-    }
+.extra {
+  margin-top: 20px;
+  font-size: 14px;
+}
 
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      border-color: #6a11cb;
-      box-shadow: 0 0 6px rgba(106, 17, 203, 0.4);
-      outline: none;
-    }
+.extra a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    button[type="submit"] {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-    }
+.extra a:hover {
+  text-decoration: underline;
+}
 
-    button[type="submit"]:hover {
-      background: linear-gradient(135deg, #5e0ebd, #1d63d0);
-      transform: translateY(-2px);
-    }
 
-    .extra {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    .extra a {
-      color: #6a11cb;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .extra a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 500px) {
-      .login-box {
-        padding: 30px 20px;
-      }
-
-      .role-buttons {
-        flex-direction: column;
-        gap: 10px;
-      }
-    }

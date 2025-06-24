@@ -15,7 +15,7 @@ exports.postAddSubject = (req, res) => // add a new subject
     .then(() => res.redirect('/subject'))
     .catch(err => res.send("Failed to add subject"));
 };
-// ✅ POST delete handler (not GET)
+//  POST delete handler (not GET)
 exports.postDeleteSubject = (req, res) =>  // delete a subject
     {
   const cid = req.params.id; // get the id of the subject from the request params

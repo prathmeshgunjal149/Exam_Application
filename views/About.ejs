@@ -1,40 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About – Exam Application System</title>
-  <link rel="stylesheet" href="/css/about.css">
+  <meta charset="UTF-8" />
+  <title>About – Shiv.EXAM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f4f6f9;
+    }
+
+    .about-section {
+      padding: 40px;
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #0052D4;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    .card ul li {
+      margin-bottom: 10px;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .team-member {
+      background: #fff;
+      padding: 20px;
+      width: 250px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid #0052D4;
+    }
+
+    .team-member h3 {
+      margin: 0;
+      color: #0052D4;
+    }
+
+    .team-member p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="logo">Shiv<span>.Exam</span></div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/login">Login</a>
-      <a href="/register">Sign Up</a>
-      <a href="/about" class="active">About</a>
+  <%- include("Navbar") %>
+
+  <section class="about-section">
+    <div class="about-container">
+      <h1><i class="fas fa-info-circle"></i> About Shiv.EXAM</h1>
+      <p class="intro">Your complete online exam solution for seamless student assessment & scheduling.</p>
+
+      <div class="card">
+        <h2>📌 Project Title & Scope</h2>
+        <p><strong>Title:</strong> Exam Application System</p>
+        <p><strong>Scope:</strong> A secure, efficient, and fully automated platform to manage student exams, subjects, scheduling, and performance analytics in educational institutions.</p>
+      </div>
+
+      <div class="card">
+        <h2>🌟 Purpose & Key Objectives</h2>
+        <ul>
+          <li><i class="fas fa-user-shield"></i> Secure login for students and admins (JWT-based auth)</li>
+          <li><i class="fas fa-calendar-alt"></i> Schedule exams by subject, date, and class</li>
+          <li><i class="fas fa-question-circle"></i> Create/manage MCQs with correct answers</li>
+          <li><i class="fas fa-user-graduate"></i> Track individual student performance</li>
+          <li><i class="fas fa-file-pdf"></i> Download result reports in PDF format</li>
+          <li><i class="fas fa-server"></i> Backend with Node.js and MySQL</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>👨‍💻 Project Creators</h2>
+
+        <div class="team-grid">
+          <div class="team-member">
+            <img src="/css/mypic.jpg" alt="Prathmesh Gunjal" />
+            <h3>Prathmesh Gunjal</h3>
+            <p><i class="fas fa-laptop-code"></i> Full Stack Developer</p>
+            <p><i class="fas fa-phone"></i> 7058202092</p>
+            <p><i class="fas fa-envelope"></i> prathmeshgunjal149@gmail.com</p>
+          </div>
+
+          <div class="team-member">
+            <img src="/css/rutujapic.jpg" alt="Rutuja Rajpure" />
+            <h3>Rutuja Rajpure</h3>
+            <p><i class="fas fa-laptop-code"></i> Full Stack Developer</p>
+            <p><i class="fas fa-phone"></i> 7219395842</p>
+            <p><i class="fas fa-envelope"></i> rutujar0407@gmail.com</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </nav>
-
-  <div class="container">
-    <h1>Exam Application System</h1>
-
-    <h3>1. Title and Scope</h3>
-    <p><strong>Title:</strong> Exam Application System</p>
-    <p><strong>Scope:</strong> This system manages exams for students in an educational institution. It handles students, subjects, questions, scheduling, and tracking performance — all accessible via a secure web-based backend built with Node.js and MySQL.</p>
-
-    <h3>2. Purpose / Objective</h3>
-    <ul>
-      <li>Manage student and admin data securely</li>
-      <li>Schedule exams by subject and date</li>
-      <li>Create questions and associate them with exams</li>
-      <li>Record and analyze student performance</li>
-      <li>Support subject-student and exam-student relationships</li>
-      <li>Provide API access via secure authentication (JWT)</li>
-    </ul>
-  </div>
+  </section>
 
 </body>
 </html>

@@ -1,112 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Exam Schedule</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/schedule.css">
+  <meta charset="UTF-8" />
+  <title>Exam Schedule - Exam Application System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    /* Layout */
+    .container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #002d72;
+      color: white;
+      padding: 30px 20px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      user-select: none;
+    }
+
+    .sidebar h3 {
+      color: #ffe600;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      font-size: 15px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #0052D4;
+      color: white;
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-x: auto;
+    }
+
+    /* Flex row for form and table side by side */
+    .row {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    /* Form and table boxes */
+    .form-box, .table-box {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-box {
+      flex: 1 1 350px;
+      max-width: 450px;
+      min-width: 320px;
+    }
+
+    .table-box {
+      flex: 2 1 600px;
+      min-width: 300px;
+      overflow-x: auto;
+    }
+
+    /* Titles */
+    .form-box h2, .table-box h2 {
+      color: #0052D4;
+      margin-bottom: 20px;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    /* Form styles */
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #0052D4;
+      box-shadow: 0 0 5px #0052D4aa;
+    }
+
+    button.btn-custom {
+      background: linear-gradient(to right, #0052D4, #4364F7);
+      color: white;
+      font-weight: 700;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s ease;
+    }
+
+    button.btn-custom:hover {
+      background: linear-gradient(to right, #4364F7, #6FB1FC);
+    }
+
+    /* Table styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      user-select: none;
+    }
+
+    thead th {
+      background-color: #0052D4;
+      color: white;
+      padding: 12px 10px;
+      font-weight: 700;
+    }
+
+    tbody td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* Action buttons */
+    .btn-warning, .btn-danger {
+      border: none;
+      border-radius: 4px;
+      color: white;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 0 2px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-warning {
+      background-color: #f39c12;
+    }
+
+    .btn-warning:hover {
+      background-color: #d78b0c;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+    }
+
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      user-select: none;
+      flex-wrap: wrap;
+    }
+
+    .pagination li {
+      list-style: none;
+    }
+
+    .pagination a {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #0052D4;
+      border-radius: 6px;
+      color: #0052D4;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .pagination a:hover {
+      background-color: #0052D4;
+      color: white;
+    }
+
+    .pagination a.active {
+      background-color: #0052D4;
+      color: white;
+      cursor: default;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .form-box, .table-box {
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="header">Welcome to the Exam Application System</div>
+  <div class="header">📅 Welcome to the Exam Schedule Panel</div>
 
-  <div class="wrapper">
+  <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <h3>Admin</h3>
-      <a href="/admin">Admin</a>
-      <a href="/subject">Subject</a>
-      <a href="/exam">Exam</a>
-      <a href="/question">Questions</a>
-      <a href="/schedule">Schedule</a>
-      <a href="/views/About.ejs"></a>
+      <h3><i class="fas fa-user-shield"></i> Admin</h3>
+      <a href="/admin"><i class="fas fa-user"></i> Admin</a>
+      <a href="/subject"><i class="fas fa-book"></i> Subject</a>
+      <a href="/exam"><i class="fas fa-file-alt"></i> Exam</a>
+      <a href="/question"><i class="fas fa-question-circle"></i> Questions</a>
+      <a href="/schedule" class="active"><i class="fas fa-calendar-alt"></i> Schedule</a>
     </div>
 
     <!-- Main Content -->
-    <div class="main">
-      <div class="row justify-content-around">
-        <!-- Schedule Form -->
-        <div class="col-md-5 mb-4 form-wrapper">
-          <div class="card p-4">
-            <h5 class="mb-3">Schedule Form</h5>
-            <form action="/schedule" method="POST">
-              <div class="form-group">
-                <label>Date</label>
-                <input type="date" name="date" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label>Start Time</label>
-                <input type="time" name="starttime" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label>End Time</label>
-                <input type="time" name="endtime" class="form-control" required />
-              </div>
-              <div class="form-group">
-                <label>Course</label>
-                <select name="cid" class="form-control" required>
-                  <option value="">Select Course</option>
-                  <% courses.forEach(course => { %>
-                    <option value="<%= course.cid %>"><%= course.cname %></option>
-                  <% }) %>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Exam</label>
-                <select name="ex_id" class="form-control" required>
-                  <option value="">Select Exam</option>
+    <div class="main-content">
+      <div class="row">
+        <!-- Add Schedule Form -->
+        <div class="form-box">
+          <h2><i class="fas fa-plus"></i> Add New Schedule</h2>
+          <form action="/schedule" method="POST">
+            <label for="date">Date</label>
+            <input type="date" name="date" id="date" required />
 
-                  <% exams.forEach(exam => { %>
-                    <option value="<%= exam.ex_id %>"><%= exam.exname %></option>
-                  <% }) %>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-custom btn-block">Submit Schedule</button>
-            </form>
-          </div>
+            <label for="starttime">Start Time</label>
+            <input type="time" name="starttime" id="starttime" required />
+
+            <label for="endtime">End Time</label>
+            <input type="time" name="endtime" id="endtime" required />
+
+            <label for="cid">Course</label>
+            <select name="cid" id="cid" required>
+              <option value="">Select Course</option>
+              <% courses.forEach(course => { %>
+                <option value="<%= course.cid %>"><%= course.cname %></option>
+              <% }) %>
+            </select>
+
+            <label for="ex_id">Exam</label>
+            <select name="ex_id" id="ex_id" required>
+              <option value="">Select Exam</option>
+              <% exams.forEach(exam => { %>
+                <option value="<%= exam.ex_id %>"><%= exam.exname %></option>
+              <% }) %>
+            </select>
+
+            <button type="submit" class="btn-custom"><i class="fas fa-save"></i> Submit Schedule</button>
+          </form>
         </div>
 
-        <!-- Schedule List -->
-        <div class=" list-wrapper">
-          <div class="card p-3">
-            <h5 class="mb-3">Schedule List</h5>
-            <table class="table table-bordered table-striped">
-              <thead class="thead-dark">
-                <tr>
-                  <th>Date</th>
-                  <th>Start</th>
-                  <th>End</th>
-                  <th>Course</th>
-                  <th>Exam</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% if (schedules.length > 0) { %>
-                  <% schedules.forEach(s => { %>
-                    <tr>
-                      <td><%= s.date.toISOString().split('T')[0] %></td>
-                      <td><%= s.starttime %></td>
-                      <td><%= s.endtime %></td>
-                      <td><%= s.cname %></td>
-                      <td><%= s.ename %></td>
-                      <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                      </td>
-                    </tr>
-                  <% }) %>
-                <% } else { %>
-                  <tr>
-                    <td colspan="6" class="text-center">No schedules found</td>
+        <!-- Schedule List Table -->
+        <div class="table-box">
+          <h2><i class="fas fa-list"></i> Schedule List</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Course</th>
+                <th>Exam</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleTableBody">
+              <% if (schedules.length > 0) { %>
+                <% schedules.forEach((s, index) => { %>
+                  <tr class="schedule-row" data-index="<%= index %>">
+                    <td><%= s.date.toISOString().split('T')[0] %></td>
+                    <td><%= s.starttime %></td>
+                    <td><%= s.endtime %></td>
+                    <td><%= s.cname %></td>
+                    <td><%= s.exname %></td>
+                    <td>
+                      <button class="btn-warning" title="Edit"><i class="fas fa-edit"></i></button>
+                      <button class="btn-danger" title="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
                   </tr>
-                <% } %>
-              </tbody>
-            </table>
-          </div>
+                <% }) %>
+              <% } else { %>
+                <tr>
+                  <td colspan="6" style="text-align:center; padding: 20px 0;">No schedules found</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+
+          <!-- Pagination -->
+          <nav>
+            <ul class="pagination" id="pagination"></ul>
+          </nav>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Pagination Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const rowsPerPage = 5;
+      const rows = document.querySelectorAll(".schedule-row");
+      const pagination = document.getElementById("pagination");
+
+      function displayRows(startIndex) {
+        rows.forEach((row, index) => {
+          row.style.display = index >= startIndex && index < startIndex + rowsPerPage ? "" : "none";
+        });
+      }
+
+      function setupPagination() {
+        const pageCount = Math.ceil(rows.length / rowsPerPage);
+        pagination.innerHTML = "";
+
+        for (let i = 0; i < pageCount; i++) {
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="#" class="${i === 0 ? 'active' : ''}">${i + 1}</a>`;
+
+          li.querySelector('a').addEventListener("click", (e) => {
+            e.preventDefault();
+            displayRows(i * rowsPerPage);
+
+            pagination.querySelectorAll("a").forEach(a => a.classList.remove("active"));
+            e.target.classList.add("active");
+          });
+
+          pagination.appendChild(li);
+        }
+
+        if (pageCount > 0) {
+          displayRows(0);
+        }
+      }
+
+      setupPagination();
+    });
+  </script>
+
 </body>
 </html>

@@ -1,75 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Register – Exam App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/adminRegister.css">
+  <meta charset="UTF-8" />
+  <title>Admin Register – Shiv.EXAM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .register-container {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      max-width: 400px;
+      width: 100%;
+      animation: slideUp 0.8s ease;
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #0052D4;
+      outline: none;
+      box-shadow: 0 0 6px rgba(0, 82, 212, 0.3);
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #0052D4, #4364F7);
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .register-btn:hover {
+      background: linear-gradient(to right, #4364F7, #6FB1FC);
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #0052D4;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Shiv<span>.Exam</span></div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/login">Login</a>
-      <a href="/register">Sign Up</a>
-      <a href="/about">About</a>
-      <a href="/contact">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Register Box -->
-  <div class="register-wrapper">
-    <div class="register-box">
-
-      <h1>Welcome Admin</h1>
-      <p>Register a new admin account</p>
-
-      <!-- Role Buttons -->
-      <div class="role-buttons">
-        <a href="/register">Student Register</a>
-        <a href="/adminRegister">Admin Register</a>
+  <div class="register-container">
+    <h2><i class="fas fa-user-plus"></i> Admin Register</h2>
+    <form action="/admin/register" method="POST">
+      <div class="input-group">
+        <input type="text" name="aname" placeholder="Enter Admin Name" required />
+        <i class="fas fa-user"></i>
       </div>
 
-      <!-- Step Indicator -->
-      <div class="steps">
-        <div class="step active">1 <span>Account</span></div>
-        <div class="step">2 <span>Details</span></div>
+      <div class="input-group">
+        <input type="password" name="apassword" placeholder="Enter Password" required />
+        <i class="fas fa-lock"></i>
       </div>
 
-      <!-- Registration Form -->
-      <form action="/adminRegister" method="POST">
+      <button class="register-btn" type="submit">Register</button>
+    </form>
 
-        <div class="form-section">
-          <label for="aname">Admin Name</label>
-          <input type="text" id="aname" name="aname" required>
-        </div>
-
-        <div class="form-section">
-          <label for="aemail">Email</label>
-          <input type="email" id="aemail" name="aemail" required>
-        </div>
-
-        <div class="form-section">
-          <label for="ausername">Username</label>
-          <input type="text" id="ausername" name="ausername" required>
-        </div>
-
-        <div class="form-section">
-          <label for="apassword">Password</label>
-          <input type="password" id="apassword" name="apassword" required>
-        </div>
-
-        <button type="submit">Register</button>
-
-        <div class="extra">
-          Already have an account? <a href="/login">Login</a>
-        </div>
-      </form>
-
+    <div class="back-link">
+      <p>Already an admin? <a href="/admin/login">Login here</a></p>
     </div>
   </div>
 

@@ -40,3 +40,29 @@ exports.updateExam = (id, name, total, passing) => { //update exam
     });
   });
 };
+//const conn = require("../config/connection");
+
+
+exports.getAllExams = () => {
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT schid, date, starttime, endtime, c.cname, e.exname FROM schedule sch JOIN course c ON sch.cid = c.cid JOIN exam e ON sch.ex_id = e.ex_id", (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};
+
+exports.getAllExamsWithSchedule = () => {
+  return new Promise((resolve, reject) => {
+    const sql = `
+      SELECT sch.schid, c.cname, e.exname, sch.date, sch.starttime, sch.endtime
+      FROM schedule sch
+      JOIN course c ON sch.cid = c.cid
+      JOIN exam e ON sch.ex_id = e.ex_id
+    `;
+    conn.query(sql, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+};

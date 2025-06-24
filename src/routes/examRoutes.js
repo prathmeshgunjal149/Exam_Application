@@ -8,7 +8,7 @@ router.get('/exam', examCtrl.getExamPage);//to call the getExamPage function in 
 // Add new exam
 router.post('/exam', examCtrl.postAddExam);// to call the postAddExam function in examController.js file
 
-// Update exam (optional)
+// Update exam 
 router.get('/exam/update', examCtrl.getUpdateForm);//to call the getUpdateForm function in examController.js file
 router.post('/exam/update', examCtrl.postUpdateExam);// to call the postUpdateExam function in examController.js file
 

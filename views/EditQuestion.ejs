@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Question - Exam Application System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      background: linear-gradient(to right, #0052D4, #4364F7, #6FB1FC);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 600px;
+      background: white;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0052D4;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    button {
+      background-color: #0052D4;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      margin-top: 25px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #003c9e;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #0052D4;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Edit Question</div>
+
+  <div class="container">
+    <h2><i class="fas fa-edit"></i> Update Question Details</h2>
+
+    <form action="/question/update/<%= question.qid %>" method="POST">
+      <label>Question:</label>
+      <input type="text" name="qname" value="<%= question.qname %>" required>
+
+      <label>Option 1:</label>
+      <input type="text" name="op1" value="<%= question.op1 %>" required>
+
+      <label>Option 2:</label>
+      <input type="text" name="op2" value="<%= question.op2 %>" required>
+
+      <label>Option 3:</label>
+      <input type="text" name="op3" value="<%= question.op3 %>" required>
+
+      <label>Option 4:</label>
+      <input type="text" name="op4" value="<%= question.op4 %>" required>
+
+      <label>Correct Option Number (1-4):</label>
+      <input type="number" name="answer" min="1" max="4" value="<%= question.answer %>" required>
+
+      <label>Select Course:</label>
+      <select name="cid" required>
+        <% courses.forEach(course => { %>
+          <option value="<%= course.cid %>" <%= course.cid === question.cid ? 'selected' : '' %>>
+            <%= course.cname %>
+          </option>
+        <% }) %>
+      </select>
+
+      <button type="submit"><i class="fas fa-save"></i> Update Question</button>
+    </form>
+
+    <a href="/question" class="back-link"><i class="fas fa-arrow-left"></i> Back to Question List</a>
+  </div>
+
+</body>
+</html>

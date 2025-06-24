@@ -1,42 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/studentDashboard.css"> 
- 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0052D4, #4364F7);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .dashboard-container {
+      background: #fff;
+      max-width: 960px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow:
+        0 8px 24px rgba(67, 100, 247, 0.3),
+        0 16px 48px rgba(67, 100, 247, 0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    .dashboard-header {
+      background: linear-gradient(90deg, #0052D4, #4364F7);
+      color: white;
+      padding: 36px 48px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 2.4rem;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 32px;
+      padding: 48px;
+      background-color: #f6f9ff;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 30px rgba(67, 100, 247, 0.1);
+      color: #0052D4;
+      font-weight: 600;
+      font-size: 1.15rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      border: 3px solid transparent;
+      user-select: none;
+      will-change: transform, box-shadow, border-color;
+    }
+
+    .card i {
+      font-size: 3.2rem;
+      transition: color 0.3s ease;
+      color: #4364F7;
+      filter: drop-shadow(0 2px 3px rgba(67, 100, 247, 0.35));
+    }
+
+    .card span {
+      line-height: 1.3;
+    }
+
+    .card:hover, .card:focus {
+      background: #0052D4;
+      color: white;
+      box-shadow:
+        0 10px 40px rgba(67, 100, 247, 0.5),
+        0 20px 60px rgba(67, 100, 247, 0.25);
+      border-color: #3a58cc;
+      transform: translateY(-6px);
+      outline: none;
+    }
+
+    .card:hover i, .card:focus i {
+      color: #f0f8ff;
+      filter: drop-shadow(0 0 6px #f0f8ff);
+    }
+
+    .card.logout {
+      background: #e74c3c;
+      color: white;
+      border-color: #cc3c33;
+    }
+
+    .card.logout:hover, .card.logout:focus {
+      background: #b0392a;
+      box-shadow:
+        0 10px 40px rgba(231, 76, 60, 0.7),
+        0 20px 60px rgba(231, 76, 60, 0.3);
+      border-color: #8a2c23;
+      transform: translateY(-6px);
+      outline: none;
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-header {
+        font-size: 1.8rem;
+        padding: 30px 20px;
+      }
+
+      .dashboard-cards {
+        padding: 30px 20px;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        font-size: 1rem;
+        padding: 24px 16px;
+      }
+
+      .card i {
+        font-size: 2.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <div class="header">
-    <h2>Welcome to the Exam Application System</h2>
-  </div>
+  <div class="dashboard-container" role="main" aria-label="Student Dashboard">
+    <header class="dashboard-header" tabindex="0">
+      Welcome, <%= student.name %> <span aria-label="waving hand emoji" role="img">👋</span>
+    </header>
 
-  <div class="container-fluid">
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-md-3 sidebar">
-        <h4>Student</h4>
-        <a href="/student/register">Student Register</a>
-        <a href="/student/examview">Student Exam View</a>
-        <a href="/mcq/download">Download MCQ PDF</a>
-        <a href="/question">Questions</a>
-        <a href="/schedule">Schedule</a>
+    <nav class="dashboard-cards" aria-label="Dashboard navigation cards">
+      <div
+        class="card"
+        role="button"
+        tabindex="0"
+        onclick="takeExam()"
+        onkeypress="if(event.key==='Enter') takeExam()"
+        aria-label="Take Exams"
+      >
+        <i class="fas fa-pen-nib" aria-hidden="true"></i>
+        <span>Take Exams</span>
       </div>
 
-      <!-- Main Content -->
-      <div class="col-md-9 p-5">
-        <!-- You can place dynamic content here -->
-        <h4>Select an option from the left menu to continue.</h4>
+      <div
+        class="card"
+        role="button"
+        tabindex="0"
+        onclick="downloadPDF()"
+        onkeypress="if(event.key==='Enter') downloadPDF()"
+        aria-label="Download MCQ PDFs"
+      >
+        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+        <span>Download MCQ PDFs</span>
       </div>
-    </div>
+
+      <div
+        class="card"
+        role="button"
+        tabindex="0"
+        onclick="viewSchedule()"
+        onkeypress="if(event.key==='Enter') viewSchedule()"
+        aria-label="View Exam Schedule"
+      >
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        <span>View Exam Schedule</span>
+      </div>
+
+      <a
+        href="/student/profile"
+        target="_blank"
+        class="card"
+        aria-label="View Profile"
+        tabindex="0"
+        rel="noopener noreferrer"
+      >
+        <i class="fas fa-user-circle" aria-hidden="true"></i>
+        <span>Profile</span>
+      </a>
+
+      <a
+        href="/logout"
+        class="card logout"
+        aria-label="Logout"
+        tabindex="0"
+        rel="noopener noreferrer"
+      >
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+        <span>Logout</span>
+      </a>
+    </nav>
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function takeExam() {
+      window.location.href = "/student/exams";
+    }
+
+    function downloadPDF() {
+      window.location.href = "/student/download";
+    }
+
+    function viewSchedule() {
+      window.location.href = "/student/schedule";
+    }
+  </script>
+
 </body>
 </html>

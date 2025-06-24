@@ -1,24 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Exam.net – Online Exam Platform</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/home.css">
+  <meta charset="UTF-8" />
+  <title>Shiv.Exam – Online Exam Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/home.css" />
+  <style>
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero {
+      padding: 120px 20px 60px;
+      text-align: center;
+      background: linear-gradient(135deg, #0052D4, #4364F7);
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      animation: fadeInUp 1s ease forwards;
+      user-select: none;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      letter-spacing: 1.2px;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.5;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+   
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1100px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+
+    .feature-box {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(67, 100, 247, 0.15);
+      padding: 30px 25px;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      animation: fadeInUp 0.8s ease forwards;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Stagger animation delay */
+    .feature-box:nth-child(1) {
+      animation-delay: 0.2s;
+    }
+    .feature-box:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+    .feature-box:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    .feature-box:nth-child(4) {
+      animation-delay: 0.8s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(67, 100, 247, 0.3);
+    }
+    .feature-box h3 {
+      color: #0052D4;
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+    .feature-box p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.4;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Footer */
+    .footer {
+      background: #0052D4;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      user-select: none;
+      position: relative;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s ease;
+      cursor: default;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer:hover {
+      background: #003a8c;
+    }
+    .footer p {
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+    .footer:hover p {
+      color: #d1e7ff;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    /* WhatsApp Icon Styles */
+    .whatsapp-link {
+      color: #25D366;
+      font-size: 24px;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .whatsapp-link:hover {
+      color: #128C7E;
+      transform: scale(1.15);
+    }
+    .whatsapp-link svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+      margin-right: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .features {
+        flex-direction: column;
+        max-width: 400px;
+        margin-bottom: 60px;
+      }
+      .feature-box {
+        width: 100%;
+      }
+      .footer {
+        flex-direction: column;
+        font-size: 1rem;
+        gap: 8px;
+      }
+      .whatsapp-link {
+        font-size: 28px;
+      }
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    body > .hero,
+    body > .features {
+      flex-shrink: 0;
+    }
+    body > .footer {
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo"><strong>Shiv.EXAM</strong></div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-      <a href="/About">About</a>
-       <a href="/Contact">ContactUs</a>
-    </div>
-  </nav>
+  <%- include("Navbar") %>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -47,9 +213,23 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 Exam.net – All rights reserved.</p>
+  <footer class="footer" role="contentinfo" aria-label="Site Footer">
+    <p>&copy; 2025 Shiv.Exam – All rights reserved.</p>
+    <!-- WhatsApp Contact Link -->
+    <a
+      href="https://wa.me/7058201092?text=Hello%20shiv.exam%20Support!"
+      class="whatsapp-link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contact us on WhatsApp"
+      title="Contact us on WhatsApp"
+    >
+      <!-- WhatsApp SVG Icon -->
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M20.52 3.48A11.819 11.819 0 0 0 3.48 20.52L2 22l1.52-3.54A11.819 11.819 0 0 0 20.52 3.48ZM12 21c-1.67 0-3.29-.45-4.71-1.3l-3.4.9.9-3.41A8.86 8.86 0 0 1 3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9Zm5.2-7.3c-.2-.1-1.18-.58-1.37-.65-.19-.07-.33-.1-.47.1-.14.19-.55.65-.68.78-.12.13-.25.15-.46.05-.2-.1-.85-.31-1.62-.99-.6-.54-1-1.2-1.12-1.39-.12-.18-.01-.27.09-.36.1-.1.23-.25.35-.37.11-.12.15-.2.22-.33.07-.12.04-.23 0-.33-.05-.1-.46-1.1-.64-1.52-.17-.4-.34-.35-.47-.36-.12-.01-.26-.01-.4-.01-.14 0-.37.05-.56.23-.18.17-.7.69-.7 1.67s.72 1.94.82 2.07c.1.12 1.41 2.15 3.41 3.01.48.21.85.33 1.14.42.48.15.92.13 1.27.08.39-.06 1.18-.48 1.35-.94.17-.46.17-.85.12-.94-.05-.08-.19-.13-.38-.23Z"></path>
+      </svg>
+      WhatsApp
+    </a>
   </footer>
-
 </body>
 </html>

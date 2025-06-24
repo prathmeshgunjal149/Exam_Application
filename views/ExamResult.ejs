@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f2f6fc;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #0052D4;
+      margin-bottom: 30px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .stat-box {
+      flex: 1 1 180px;
+      background: #f0f4ff;
+      border: 1px solid #cce0ff;
+      border-radius: 10px;
+      padding: 15px;
+      font-weight: 500;
+    }
+
+    .stat-box span {
+      display: block;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .pass {
+      color: green;
+    }
+
+    .fail {
+      color: red;
+    }
+
+    .summary {
+      margin-top: 40px;
+    }
+
+    .summary h2 {
+      color: #333;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    .question-summary {
+      background: #f9f9f9;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 5px solid #0052D4;
+      border-radius: 6px;
+    }
+
+    .question-summary p {
+      margin: 5px 0;
+    }
+
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+
+    .wrong {
+      color: red;
+      font-weight: bold;
+    }
+
+    .not-attempted {
+      color: #999;
+    }
+
+    @media (max-width: 768px) {
+      .stats {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stat-box {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🎓 Exam Result for <%= studentName %></h1>
+
+    <% const percentage = ((correct / total) * 100).toFixed(2); %>
+    <% const status = percentage >= 40 ? "Pass" : "Fail"; %>
+
+    <div class="stats">
+      <div class="stat-box">
+        Total Questions
+        <span><%= total %></span>
+      </div>
+      <div class="stat-box">
+        Correct Answers
+        <span class="pass"><%= correct %></span>
+      </div>
+      <div class="stat-box">
+        Wrong Answers
+        <span class="fail"><%= wrong %></span>
+      </div>
+      <div class="stat-box">
+        Percentage
+        <span><%= percentage %> %</span>
+      </div>
+      <div class="stat-box">
+        Status
+        <span class="<%= status === 'Pass' ? 'pass' : 'fail' %>"><%= status %></span>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h2>📋 Answer Summary</h2>
+      <% resultDetails.forEach((res, index) => { %>
+        <div class="question-summary">
+          <p><strong>Q<%= index + 1 %>:</strong> <%= res.question %></p>
+          <p><strong>Your Answer:</strong>
+            <% if (res.submitted === "Not Attempted") { %>
+              <span class="not-attempted">❌ Not Attempted</span>
+            <% } else { %>
+              <%= res.submitted %>
+            <% } %>
+          </p>
+          <p><strong>Correct Answer:</strong> <%= res.correctOptionText %> (Option <%= res.correctOptionNumber %>)</p>
+          <% if (res.isCorrect) { %>
+            <p class="correct">✔ Correct</p>
+          <% } else { %>
+            <p class="wrong">✘ Wrong</p>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+
+</body>
+</html>

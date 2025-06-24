@@ -1,83 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Register – Exam App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>Register – Shiv.EXAM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts and Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/register.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="/css/register.css" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Shiv<span>.Exam</span></div>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/login">Login</a>
-      <a href="/register">Sign Up</a>
-      <a href="/about">About</a>
-      <a href="/Contact">About</a>
-    </div>
-  </nav>
+  <!-- Reusable Navbar -->
+  <%- include("Navbar") %>
 
-  <!-- Register Box -->
-  <div class="register-wrapper">
-    <div class="register-box">
+  <!-- Registration Section -->
+  <section class="register-container">
+    <div class="register-card">
+      <h2><i class="fas fa-user-plus"></i> Student Registration</h2>
+      <p class="subtext">Create your account to get started with Shiv.EXAM</p>
 
-      <h1>Welcome to Exam App</h1>
-      <p>Register an account or sign up for a free trial</p>
-
-      <!-- Role Buttons -->
+      <!-- Role Switcher -->
       <div class="role-buttons">
-       
-        <a href="/register">Student Register</a>
-        <a href="/adminRegister">Admin Register</a>
-      </div>
-
-      <!-- Step Indicator -->
-      <div class="steps">
-        <div class="step active">1 <span>Account</span></div>
-        <div class="step">2 <span>Details</span></div>
+        <a href="/register" class="active"><i class="fas fa-user-graduate"></i> Student</a>
+        
       </div>
 
       <!-- Registration Form -->
-      <form action="/register" method="POST">
+      <form action="/register" method="POST" class="register-form">
 
-        <div class="form-section">
-          <label for="fullname">Full Name</label>
-          <input type="text" id="fullname" name="fullname" required>
+        <div class="form-group">
+          <label for="fullname"><i class="fas fa-user"></i> Full Name</label>
+          <input type="text" id="fullname" name="fullname" required />
         </div>
 
-        <div class="form-section">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+        <div class="form-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" id="email" name="email" required />
         </div>
 
-        <div class="form-section">
-          <label for="contact">Contact</label>
-          <input type="text" id="contact" name="contact" required>
+        <div class="form-group">
+          <label for="contact"><i class="fas fa-phone"></i> Contact</label>
+          <input type="text" id="contact" name="contact" required />
         </div>
 
-        <div class="form-section">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" required>
+        <div class="form-group">
+          <label for="username"><i class="fas fa-user-circle"></i> Username</label>
+          <input type="text" id="username" name="username" required />
         </div>
 
-        <div class="form-section">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
+        <div class="form-group">
+          <label for="password"><i class="fas fa-lock"></i> Password</label>
+          <input type="password" id="password" name="password" required />
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Register
+        </button>
 
-        <div class="extra">
-          Already have an account? <a href="/login">Login</a>
-        </div>
+        <p class="login-link">
+          Already have an account? <a href="/login">Login here</a>
+        </p>
       </form>
-
     </div>
-  </div>
+  </section>
 
 </body>
 </html>
